@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CALORIFY</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 class="site-title">CALORIFY</h1>
+      <p class="site-subtitle">Track Your Calories Burned</p>
+    </header>
+
+    <main>
+      <form action="/predict" method="POST" class="calorie-form">
+        <div class="form-group">
+          <label for="Gender">Gender (0 for Female, 1 for Male):</label>
+          <input type="number" id="Gender" name="Gender" required>
+        </div>
+        <div class="form-group">
+          <label for="Age">Age:</label>
+          <input type="number" id="Age" name="Age" required>
+        </div>
+        <div class="form-group">
+          <label for="Height">Height (cm):</label>
+          <input type="number" id="Height" name="Height" required>
+        </div>
+        <div class="form-group">
+          <label for="Weight">Weight (kg):</label>
+          <input type="number" id="Weight" name="Weight" required>
+        </div>
+        <div class="form-group">
+          <label for="Duration">Duration (minutes):</label>
+          <input type="number" id="Duration" name="Duration" required>
+        </div>
+        <div class="form-group">
+          <label for="Heart_Rate">Heart Rate (bpm):</label>
+          <input type="number" id="Heart_Rate" name="Heart_Rate" required>
+        </div>
+        <div class="form-group">
+          <label for="Body_Temp">Body Temperature (°C):</label>
+          <input type="number" id="Body_Temp" name="Body_Temp" required>
+        </div>
+        <button type="submit" class="btn">Calculate Calories Burned</button>
+      </form>
+
+      {% if prediction %}
+      <div class="result">
+        <h2>Calories Burned: <span class="calories">{{ prediction }}</span></h2>
+        <div class="calorie-bar" style="width: {{ prediction_width }}%"></div>
+      </div>
+      {% endif %}
+
+      {% if error %}
+      <div class="error">
+        <p>{{ error }}</p>
+      </div>
+      {% endif %}
+    </main>
+  </div>
+</body>
+
+</html>
+
+
+
